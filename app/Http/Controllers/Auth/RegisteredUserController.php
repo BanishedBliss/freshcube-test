@@ -46,6 +46,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('deals', absolute: false));
+        return redirect(route('leads', absolute: false));
     }
 }

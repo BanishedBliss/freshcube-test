@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.jsx";
 import {Head} from "@inertiajs/react";
 
-export default function Index({auth, deals}) {
+export default function Index({auth, leads}) {
   return (
     <AuthenticatedLayout
       user={auth.user}

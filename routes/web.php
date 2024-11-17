@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\DealController;
+use App\Http\Controllers\LeadController;
 use App\Http\Controllers\HistoryRecordController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::redirect('/', 'deals');
+Route::redirect('/', 'leads');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    Route::get('deals',  [DealController::class, 'index'])->name('deals');
+    Route::get('leads',  [LeadController::class, 'index'])->name('leads');
     Route::get('history', [HistoryRecordController::class, 'index'])->name('history');
 });
 

@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'amocrm' => [
+        'subdomain' => env('AMOCRM_SUBDOMAIN'),
+        'client_secret' => env('AMOCRM_CLIENT_SECRET'),
+        'client_id' => env('AMOCRM_CLIENT_ID'),
+        'long_term_access_token' => env('AMOCRM_LONG_TERM_ACCESS_TOKEN'),
+    ],
 ];
