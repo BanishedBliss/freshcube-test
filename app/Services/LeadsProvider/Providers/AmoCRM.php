@@ -14,8 +14,6 @@ use AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel;
 use AmoCRM\Models\NoteType\CommonNote;
-use App\Http\Resources\LeadCollection;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 use AmoCRM\Exceptions\AmoCRMApiException;
 use AmoCRM\Exceptions\AmoCRMMissedTokenException;
@@ -42,19 +40,19 @@ class AmoCRM implements LeadsProviderInterface
      * @throws AmoCRMApiException
      * @throws AmoCRMMissedTokenException
      */
-    public function getLeads(): AnonymousResourceCollection
+    public function getLeads(): array
     {
         $leads = $this->apiClient
             ->leads()->get(null, ['contacts']);
 
-        return LeadCollection::collection(collect($leads->toArray()));
+        return $leads->toArray();
     }
 
     public function addContact(
         int     $leadID,
         string  $name,
         string  $phone,
-        string  $comment): void
+        string  $commonNote): void
     {
         // Создание модели существующей сделки для связи с новым контактом.
         $lead = new LeadModel();
@@ -84,7 +82,7 @@ class AmoCRM implements LeadsProviderInterface
             $contact = $this->apiClient->contacts()->addOne($contact);
             if ($contact)
             {
-                ContactCreatedEvent::dispatch($leadID, $name, $phone, $comment);
+                ContactCreatedEvent::dispatch($leadID, $name, $phone, $commonNote);
             }
         } catch (AmoCRMApiException $e) {
             ContactCreateErrorEvent::dispatch($e->getMessage());
@@ -105,7 +103,7 @@ class AmoCRM implements LeadsProviderInterface
         // Добавление примечания.
         $newContactID = $contact->getId();
         $note = new CommonNote();
-        $note->setText($comment);
+        $note->setText($commonNote);
         $note->setEntityId($newContactID);
         try {
             $this->apiClient->notes('contacts')->addOne($note);

@@ -10,9 +10,15 @@ class ContactController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($leadID)
     {
-        return inertia('Contact/CreateForm', []);
+        $leadID = (int) $leadID;
+        if ($leadID < 1)
+            return redirect()->to(route('leads'));
+
+        return inertia('Contact/Create', [
+            'lead_id' => $leadID,
+        ]);
     }
 
     /**
@@ -25,7 +31,7 @@ class ContactController extends Controller
             $request->lead_id,
             $request->name,
             $request->phone,
-            $request->comment,
+            $request->common_note,
         );
 
         return redirect()->to(route('leads'));

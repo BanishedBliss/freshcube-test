@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreContactRequest extends FormRequest
+class CreateContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,6 @@ class StoreContactRequest extends FormRequest
     {
         return [
             'lead_id' => 'required|integer',
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'common_note' => 'required|string',
         ];
     }
 }

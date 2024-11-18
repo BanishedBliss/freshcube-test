@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\HistoryRecordResource;
 use App\Models\HistoryRecord;
-use App\Http\Requests\StoreHistoryRecordRequest;
-use App\Http\Requests\UpdateHistoryRecordRequest;
+use Illuminate\Support\Facades\Log;
 
 class HistoryRecordController extends Controller
 {
@@ -13,54 +13,10 @@ class HistoryRecordController extends Controller
      */
     public function index()
     {
-        return inertia('History/Index', []);
-    }
+        $historyRecords = HistoryRecord::query()->orderBy('created_at', 'desc')->paginate(10);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreHistoryRecordRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(HistoryRecord $historyRecord)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(HistoryRecord $historyRecord)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateHistoryRecordRequest $request, HistoryRecord $historyRecord)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(HistoryRecord $historyRecord)
-    {
-        //
+        return inertia('History/Index', [
+            'historyRecords' => HistoryRecordResource::collection($historyRecords)
+        ]);
     }
 }

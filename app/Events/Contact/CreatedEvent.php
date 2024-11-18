@@ -19,7 +19,7 @@ class CreatedEvent implements ContactCreateAttemptInterface
         public int      $leadID,
         public string   $name,
         public string   $phone,
-        public string   $comment)
+        public string   $commonNote)
     {
         //
     }
@@ -43,7 +43,7 @@ class CreatedEvent implements ContactCreateAttemptInterface
             lead_id:    $this->leadID,
             name:       $this->name,
             phone:      $this->phone,
-            comment:    $this->comment
+            commonNote:    $this->commonNote
         }";
 
         HistoryRecord::create([
