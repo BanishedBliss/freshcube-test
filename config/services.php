@@ -36,6 +36,8 @@ return [
     ],
 
     'amocrm' => [
+        'redirect_url' => env('AMOCRM_REDIRECT_URL'),
+        'auth_type' => env('AMOCRM_AUTH_TYPE', 'longterm'),
         'subdomain' => env('AMOCRM_SUBDOMAIN'),
         'client_secret' => env('AMOCRM_CLIENT_SECRET'),
         'client_id' => env('AMOCRM_CLIENT_ID'),

@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('history_records', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('recorded_at');
-            $table->enum('action', ['contact_added']);
-            $table->string('error');
+            $table->string('action');
+            $table->boolean('success');
+            $table->tinyText('result');
+            $table->timestamp('created_at');
         });
     }
 
