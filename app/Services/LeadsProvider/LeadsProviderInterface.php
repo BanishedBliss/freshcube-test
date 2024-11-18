@@ -6,8 +6,8 @@ interface LeadsProviderInterface
 {
     public function getLeads() : array;
     public function addContact(
-        int $leadID,
-        string $name,
-        string $phone,
-        string $commonNote);
+        int     $leadID,
+        string  $name,
+        string  $phone,
+        string  $commonNote);
 }

@@ -22,6 +22,9 @@ use AmoCRM\Exceptions\AmoCRMoAuthApiException;
 use App\Events\Contact\CreatedEvent     as ContactCreatedEvent;
 use App\Events\Contact\CreateErrorEvent as ContactCreateErrorEvent;
 
+/**
+ * Сервис для работы с API AmoCRM в целях работы с лидами и контактами.
+ */
 class AmoCRM implements LeadsProviderInterface
 {
     private AmoCRMApiClient|null $apiClient;
@@ -36,18 +39,32 @@ class AmoCRM implements LeadsProviderInterface
     }
 
     /**
-     * @throws AmoCRMoAuthApiException
-     * @throws AmoCRMApiException
-     * @throws AmoCRMMissedTokenException
+     * Получает весь список лидов из панели указанного в конфигурации приложения аккаунта.
      */
     public function getLeads(): array
     {
-        $leads = $this->apiClient
-            ->leads()->get(null, ['contacts']);
+        try {
+            $leads = $this->apiClient
+                ->leads()->get(null, ['contacts']);
+        } catch (AmoCRMApiException $e) {
+            die ('Код ошибки: ' . $e->getCode() . '. Ошибка: ' . $e->getMessage());
+        }
 
         return $leads->toArray();
     }
 
+    /**
+     * Добавляет контакт к лиду в AmoCRM.
+     * Вызывает события добавления контакта
+     * для ведения истории действий в веб приложении.
+     *
+     * @param int $leadID - ID сделки в источнике.
+     * @param string $name - Имя контакта.
+     * @param string $phone - Номер телефона контакта.
+     * @param string $commonNote - Примечание о контакте.
+     *
+     * @return void
+     */
     public function addContact(
         int     $leadID,
         string  $name,
