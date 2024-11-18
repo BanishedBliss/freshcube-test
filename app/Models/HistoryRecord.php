@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class HistoryRecord extends Model
 {
     public $table = 'history_records';
+    public $timestamps = false;
 
     public const array RECORD_TYPES = [
         'contact.create' => 'Создание контакта сделки',

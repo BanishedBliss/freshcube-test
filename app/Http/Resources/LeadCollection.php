@@ -16,10 +16,10 @@ class LeadCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'has_contact' => (bool) $this->whenHas('contacts'),
-            'created_at' => Carbon::createFromTimestamp($this->created_at)->toDateTimeLocalString(),
+            'id' => $this->collection['id'],
+            'name' => $this->collection['name'],
+            'has_contact' => (bool) $this->collection->has('contacts'),
+            'created_at' => Carbon::createFromTimestamp($this->collection['created_at'])->toDateTimeLocalString(),
         ];
     }
 }

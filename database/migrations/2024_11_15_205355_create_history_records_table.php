@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('action');
             $table->boolean('success');
             $table->tinyText('result');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
