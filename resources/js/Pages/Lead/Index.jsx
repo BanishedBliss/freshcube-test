@@ -19,7 +19,7 @@ export default function Index({auth, leads}) {
       <div className="py-12">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
-            <div className="p-6 text-gray-900 dark:text-gray-100">
+            <div className="p-6 text-gray-900 dark:text-gray-100 overflow-x-scroll">
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700
                                   dark:text-gray-400 border-b-2 border-gray-500">
@@ -39,7 +39,7 @@ export default function Index({auth, leads}) {
                       <td className="px-3 py-2">{lead.created_at_local}</td>
                       <td className="px-3 py-2">
                         <span className={
-                          "px-2 py-1 rounded text-white " +
+                          "px-2 py-1 rounded text-white inline-block text-center " +
                           SUCCESS_CLASS_MAP[lead.has_contact]
                         }>
                           { LEAD_HAS_CONTACT_TEXT_MAP[lead.has_contact] }
@@ -51,10 +51,10 @@ export default function Index({auth, leads}) {
                               as={lead.has_contact ? 'button' : undefined}
                         >
                           <span className={
-                            "px-2 py-1 rounded text-white " +
+                            "px-2 py-1 rounded text-white inline-block text-center " +
                             (lead.has_contact ? "bg-gray-500" : "bg-green-500")
                           }>
-                            Привязать контакт
+                            Привязать&nbsp;контакт
                           </span>
                         </Link>
                       </td>

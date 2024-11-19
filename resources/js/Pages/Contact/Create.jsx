@@ -78,7 +78,7 @@ export default function Index({auth, lead_id}) {
                 <div className="mt-4 text-right">
                   <Link href={route('leads')}
                         className="bg-gray-100 py-1 px-3 text-gray-800 rounded shadow
-                                   transition-all hover:bg-gray-200 mr-2">
+                                   transition-all hover:bg-gray-200 mr-2 inline-block">
                     Отмена
                   </Link>
                   <button type="submit"

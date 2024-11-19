@@ -19,7 +19,7 @@ export default function Index({auth, historyRecords}) {
       <div className="py-12">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
-            <div className="p-6 text-gray-900 dark:text-gray-100">
+            <div className="p-6 text-gray-900 dark:text-gray-100 overflow-x-scroll">
 
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700
@@ -36,7 +36,7 @@ export default function Index({auth, historyRecords}) {
                     <td className="px-3 py-2">{record.action}</td>
                     <td className="px-3 py-2">
                       <span className={
-                        "px-2 py-1 rounded text-white " +
+                        "px-2 py-1 rounded text-white inline-block text-center " +
                         SUCCESS_CLASS_MAP[record.success]
                       }>
                         { RECORD_SUCCESS_TEXT_MAP[record.success] }
